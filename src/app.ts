@@ -3,11 +3,11 @@ import { Application } from 'express';
 
 class App {
 	public app: Application;
-	public port: number;
+	public port: any;
 
 	constructor(appInit: { port: number; middlewares: any; controllers: any }) {
 		this.app = express();
-		this.port = appInit.port;
+		this.port = appInit.port || process.env.PORT;
 		this.middlewares(appInit.middlewares);
 		this.routes(appInit.controllers);
 	}

@@ -13,4 +13,4 @@ const app = new App({
 	],
 	middlewares: [bodyParser.json(), bodyParser.urlencoded({ extended: true })],
 });
-app.listen();
+app.listen(process.env.PORT || 5000);
