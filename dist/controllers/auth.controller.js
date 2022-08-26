@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -42,19 +51,21 @@ class AuthController {
         });
     }
     signIn(req, res) {
-        const result = (0, express_validator_1.validationResult)(req);
-        if (!result.isEmpty()) {
-            return res.status(422).json({ errors: result.array() });
-        }
-        const { username, password } = req.body;
-        const cognito = new cognito_service_1.default();
-        const user = cognito.signInUser(username, password).then((sucess) => {
-            if (sucess) {
-                res.status(200).json({ user });
+        return __awaiter(this, void 0, void 0, function* () {
+            const result = (0, express_validator_1.validationResult)(req);
+            if (!result.isEmpty()) {
+                return res.status(422).json({ errors: result.array() });
             }
-            else {
-                res.status(500).end();
-            }
+            const { username, password } = req.body;
+            const cognito = new cognito_service_1.default();
+            const user = yield cognito.signInUser(username, password).then((sucess) => {
+                if (sucess) {
+                    res.status(200).end();
+                }
+                else {
+                    res.status(500).end();
+                }
+            });
         });
     }
     verify(req, res) {
@@ -66,14 +77,12 @@ class AuthController {
         const cognito = new cognito_service_1.default();
         cognito.verifyAccount(username, code).then((sucess) => {
             if (sucess) {
-                res.status(200).end();
+                return res.status(200).json({ message: 'Verification completed.' });
             }
             else {
-                res.status(500).end();
+                return res.status(500).json({ message: 'Something went wrong.' });
             }
         });
-        console.log('Verify body is valid');
-        return res.status(200).json({ message: 'Verify body is valid.' });
     }
     validateBody(type) {
         switch (type) {

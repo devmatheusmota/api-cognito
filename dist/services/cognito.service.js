@@ -34,7 +34,6 @@ class CognitoService {
             };
             try {
                 const data = yield this.cognitoIdentity.signUp(params).promise();
-                console.log(data);
                 return true;
             }
             catch (error) {
@@ -53,7 +52,6 @@ class CognitoService {
             };
             try {
                 const data = yield this.cognitoIdentity.confirmSignUp(params).promise();
-                console.log(data);
                 return true;
             }
             catch (error) {
@@ -63,6 +61,7 @@ class CognitoService {
         });
     }
     signInUser(username, password) {
+        var _a;
         return __awaiter(this, void 0, void 0, function* () {
             const params = {
                 AuthFlow: 'USER_PASSWORD_AUTH',
@@ -75,6 +74,7 @@ class CognitoService {
             };
             try {
                 const data = yield this.cognitoIdentity.initiateAuth(params).promise();
+                console.log({ 'Acess Token': (_a = data.AuthenticationResult) === null || _a === void 0 ? void 0 : _a.AccessToken });
                 return true;
             }
             catch (error) {

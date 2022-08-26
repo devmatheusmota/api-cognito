@@ -44,7 +44,7 @@ class AuthController {
 			});
 	}
 
-	signIn(req: Request, res: Response) {
+	async signIn(req: Request, res: Response) {
 		const result = validationResult(req);
 		if (!result.isEmpty()) {
 			return res.status(422).json({ errors: result.array() });
@@ -54,9 +54,9 @@ class AuthController {
 
 		const cognito = new CognitoService();
 
-		const user = cognito.signInUser(username, password).then((sucess) => {
+		const user = await cognito.signInUser(username, password).then((sucess) => {
 			if (sucess) {
-				res.status(200).json({ user });
+				res.status(200).end();
 			} else {
 				res.status(500).end();
 			}
@@ -74,13 +74,11 @@ class AuthController {
 		const cognito = new CognitoService();
 		cognito.verifyAccount(username, code).then((sucess) => {
 			if (sucess) {
-				res.status(200).end();
+				return res.status(200).json({ message: 'Verification completed.' });
 			} else {
-				res.status(500).end();
+				return res.status(500).json({ message: 'Something went wrong.' });
 			}
 		});
-		console.log('Verify body is valid');
-		return res.status(200).json({ message: 'Verify body is valid.' });
 	}
 
 	private validateBody(type: string): any {

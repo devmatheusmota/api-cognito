@@ -63,7 +63,6 @@ class AuthMiddleware {
                     const pem = (0, jwk_to_pem_1.default)(jwk);
                     pems[key_id] = pem;
                 }
-                console.log('got all pems');
             }
             catch (error) {
                 console.log('Could not fetch jwks');

@@ -29,7 +29,6 @@ class CognitoService {
 		};
 		try {
 			const data = await this.cognitoIdentity.signUp(params).promise();
-			console.log(data);
 			return true;
 		} catch (error) {
 			console.log(error);
@@ -46,7 +45,6 @@ class CognitoService {
 		};
 		try {
 			const data = await this.cognitoIdentity.confirmSignUp(params).promise();
-			console.log(data);
 			return true;
 		} catch (error) {
 			console.log(error);
@@ -70,7 +68,7 @@ class CognitoService {
 
 		try {
 			const data = await this.cognitoIdentity.initiateAuth(params).promise();
-
+			console.log({ 'Acess Token': data.AuthenticationResult?.AccessToken });
 			return true;
 		} catch (error) {
 			console.log(error);
