@@ -3,17 +3,17 @@ import { Application } from 'express';
 
 class App {
 	public app: Application;
-	public port: any;
+	public port: number;
 
 	constructor(appInit: { port: number; middlewares: any; controllers: any }) {
 		this.app = express();
-		this.port = appInit.port || process.env.PORT;
+		this.port = appInit.port;
 		this.middlewares(appInit.middlewares);
 		this.routes(appInit.controllers);
 	}
 
 	public listen() {
-		this.app.listen(this.port, () => {
+		this.app.listen(this.port || process.env.PORT, () => {
 			console.log(`App has started on port ${this.port}`);
 		});
 	}
