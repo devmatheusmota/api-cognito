@@ -1,6 +1,6 @@
 # API utilizando AWS Cognito
 
-API desenvolvida em **NodeJS** com **Express**, utilizando **AWS Cognito** para a autenticação.
+API desenvolvida com **NodeJS** e **Express**, utilizando **AWS Cognito** para a autenticação.
 
 ## 🚀 Tecnologias utilizadas
 
