@@ -12,7 +12,7 @@ class App {
         this.routes(appInit.controllers);
     }
     listen() {
-        this.app.listen(this.port, () => {
+        this.app.listen(this.port || process.env.PORT, () => {
             console.log(`App has started on port ${this.port}`);
         });
     }
