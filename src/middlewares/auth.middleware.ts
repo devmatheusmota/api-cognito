@@ -48,7 +48,6 @@ class AuthMiddleware {
 			const { keys }: any = data;
 			for (let index = 0; index < keys.length; index++) {
 				const key = keys[index];
-				console.log(key);
 				const key_id = key.kid;
 				const modulus = key.n;
 				const exponent = key.e;
