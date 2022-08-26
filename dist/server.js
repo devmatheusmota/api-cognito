@@ -17,7 +17,7 @@ const protected_controller_1 = __importDefault(
 );
 const body_parser_1 = __importDefault(require('body-parser'));
 const app = new app_1.default({
-	port: 3000 || process.env.PORT,
+	port: 3000,
 	controllers: [
 		new home_controller_1.default(),
 		new auth_controller_1.default(),
