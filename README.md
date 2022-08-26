@@ -47,7 +47,7 @@ Voce pode acessar a API usando os seguintes endpoints:
 
 ### `POST`
 
-- `/auth/signup` :
+- `/auth/signup` : Criação do usuário
 
   - Body:
     - `username: String` (requerido): Nome de usuário
@@ -57,13 +57,13 @@ Voce pode acessar a API usando os seguintes endpoints:
     - `email: String` (requerido): Email do usuário
     - `birthdate: String` (requerido): Data de nascimento
 
-- `/auth/verify` :
+- `/auth/verify` : Verificação do email
 
   - Body:
     - `username: String` (requerido): Nome de usuário cadastrado
     - `code: String` (requerido): Código enviado para o email cadastrado
 
-- `/auth/signin` :
+- `/auth/signin` : Login do usuário
   - Body:
     - `username: String` (requerido): Nome de usuário
     - `password: String` (requerido): Senha do usuário
@@ -74,6 +74,6 @@ Voce pode acessar a API usando os seguintes endpoints:
 
 ### `GET`
 
-- `/protected/secret`
+- `/protected/secret`: Página restrita para usuários
   - Header
     - O Bearer Token gerado no login deve ser adicionado a Auth do Header da requisição
